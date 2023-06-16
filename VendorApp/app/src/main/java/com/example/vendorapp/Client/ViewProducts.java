@@ -291,8 +291,10 @@ public class ViewProducts extends AppCompatActivity implements View.OnClickListe
             //set number of items in cart
             count3 = cartModelList.size();
             cartcount.setText(count3 + "");
+            cartcount.requestLayout();
             totalamt.setText("Total Amount:" + totalPrices + "");
-
+            totalamt.invalidate();
+            
             cartAdapter = new CartAdapter(getApplicationContext(), cartModelList);
             recyclerView1.setAdapter(cartAdapter);
             cartAdapter.notifyDataSetChanged();
