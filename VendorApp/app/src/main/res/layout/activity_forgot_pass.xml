@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ForgotPass">
+
+    <RelativeLayout
+        android:id="@+id/rr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/background_toolbar">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="RECOVER PASSWORD"
+            android:textColor="@color/lightblue"
+            android:textSize="25dp"
+            android:textStyle="bold"></TextView>
+
+        <ImageView
+
+            android:id="@+id/bk"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:tooltipText="Back"
+            app:srcCompat="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/cordinates"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:tooltipText="Retrive RealTime Location"
+            app:srcCompat="@drawable/location" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="77dp"
+        android:layout_height="91dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        app:srcCompat="@drawable/ic_key2"></ImageView>
+
+    <EditText
+        android:id="@+id/editrecov"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_below="@+id/img"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/edit_text_style"
+        android:drawableStart="@drawable/email"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="4dp"
+        android:hint="Input Email Used For SignUp"
+        android:textSize="18sp"
+        android:textStyle="normal"></EditText>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editrecov"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/button_style"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:onClick="recoverpass"
+        android:text="REQUEST"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        android:textStyle="bold"></Button>
+
+</RelativeLayout>

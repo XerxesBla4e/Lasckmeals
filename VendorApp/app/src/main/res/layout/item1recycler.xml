@@ -1,0 +1,90 @@
+<androidx.cardview.widget.CardView layout_width="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="16dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_toolbar"
+        android:padding="16dp">
+        <ImageView
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_launcher_background"
+            android:scaleType="centerCrop"
+            android:id="@+id/recycleritemimg"
+            />
+
+        <TextView
+            android:id="@+id/recycleritem1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/recycleritemimg"
+            android:text="Food Name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recyclerprice1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/recycleritem1"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/recycleritem1"
+            android:text="Food Price"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recyclerdescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recycleritem1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@+id/recycleritemimg"
+            android:gravity="start"
+            android:text="Source"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/itmdiscountdesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recyclerdescription"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/recycleritemimg"
+            android:text="Discount Price"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/itmdiscountprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recyclerdescription"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/itmdiscountdesc"
+            android:gravity="center"
+            android:text="Discount Description"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:text="ADD TO CART"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/itmdiscountprice"
+            android:background="@drawable/button_style"
+            android:id="@+id/dd"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
