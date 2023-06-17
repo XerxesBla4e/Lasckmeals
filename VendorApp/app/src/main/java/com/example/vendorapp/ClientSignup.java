@@ -1,6 +1,7 @@
 package com.example.vendorapp;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,6 +14,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +42,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -51,14 +55,17 @@ public class ClientSignup extends AppCompatActivity implements GoogleApiClient.C
     public Double longitude, latitude;
     private String address;
     private EditText name, email, phonenumber, pass, repass, addres;
-    private String sname, semail, sphonenumber, spass, srepass,city,state,country,district;
+    private String sname, semail, sphonenumber, spass, srepass,sdob, city, state, country, district;
     private TextView vendorsignup;
     public ProgressDialog progressDialog;
     public FirebaseAuth mAuth;
     FirebaseStorage mStorage;
     private ImageView profile, back;
+    private EditText edtTxtDOB;
+    private Button btnPickBirthDate;
     Uri choosenimg = null;
     Button signup;
+    private Calendar DOBcalendar = Calendar.getInstance();
     private static final String TAG = "Client Signup";
 
     private static final int MY_PERMISSION_REQUEST_CODE = 71;
@@ -71,6 +78,17 @@ public class ClientSignup extends AppCompatActivity implements GoogleApiClient.C
     private static int FASTEST_INTERVAL = 3000;
     private static int DISTANCE = 10;
 
+    private DatePickerDialog.OnDateSetListener DOBDate =
+            new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                    DOBcalendar.set(Calendar.YEAR, i);
+                    DOBcalendar.set(Calendar.MONTH, i1);
+                    DOBcalendar.set(Calendar.DAY_OF_MONTH, i2);
+                    edtTxtDOB.setText(new SimpleDateFormat("yyyy-MM-dd").format(DOBcalendar.getTime()));
+
+                }
+            };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -82,6 +100,14 @@ public class ClientSignup extends AppCompatActivity implements GoogleApiClient.C
         profile.setOnClickListener(this);
         signup.setOnClickListener(this);
         vendorsignup.setOnClickListener(this);
+        btnPickBirthDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(ClientSignup.this,
+                        DOBDate, DOBcalendar.get(Calendar.YEAR),  DOBcalendar.get(Calendar.MONTH),
+                        DOBcalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
         coordinates.setOnClickListener(this);
 
@@ -107,6 +133,7 @@ public class ClientSignup extends AppCompatActivity implements GoogleApiClient.C
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case MY_PERMISSION_REQUEST_CODE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -194,6 +221,8 @@ public class ClientSignup extends AppCompatActivity implements GoogleApiClient.C
         addres = findViewById(R.id.editaddress);
         profile = findViewById(R.id.profile);
         vendorsignup = findViewById(R.id.vndrsignup);
+        btnPickBirthDate = findViewById(R.id.btnPickInitDate);
+        edtTxtDOB = findViewById(R.id.edtTxtInitDate);
         progressDialog = new ProgressDialog(ClientSignup.this);
         mStorage = FirebaseStorage.getInstance();
 
@@ -202,6 +231,7 @@ public class ClientSignup extends AppCompatActivity implements GoogleApiClient.C
 
     private boolean validatefields() {
         sname = name.getText().toString().trim();
+        sdob = edtTxtDOB.getText().toString().trim();
         semail = email.getText().toString().trim();
         sphonenumber = phonenumber.getText().toString().trim();
         spass = pass.getText().toString().trim();
@@ -211,6 +241,11 @@ public class ClientSignup extends AppCompatActivity implements GoogleApiClient.C
         if (TextUtils.isEmpty(sname)) {
             name.setError("Name Field Cant Be Empty");
             name.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(sdob)) {
+            edtTxtDOB.setError("Please Select Birth Date");
+            edtTxtDOB.requestFocus();
             return false;
         }
         if (TextUtils.isEmpty(semail)) {
@@ -258,6 +293,7 @@ public class ClientSignup extends AppCompatActivity implements GoogleApiClient.C
                 sphonenumber = phonenumber.getText().toString().trim();
                 spass = pass.getText().toString().trim();
                 srepass = repass.getText().toString().trim();
+                sdob = edtTxtDOB.getText().toString().trim();
 
                 if (!validatefields()) {
                     return;
@@ -328,6 +364,7 @@ public class ClientSignup extends AppCompatActivity implements GoogleApiClient.C
             hashMap.put("name", "" + sname);
             hashMap.put("phone", "" + sphonenumber);
             hashMap.put("address", "" + address);
+            hashMap.put("birthdate", "" + sdob);
             hashMap.put("city", "" + city);
             hashMap.put("state", "" + state);
             hashMap.put("country", "" + country);
@@ -374,6 +411,7 @@ public class ClientSignup extends AppCompatActivity implements GoogleApiClient.C
                             hashMap.put("name", "" + sname);
                             hashMap.put("phone", "" + sphonenumber);
                             hashMap.put("address", "" + address);
+                            hashMap.put("birthdate", "" + sdob);
                             hashMap.put("city", "" + city);
                             hashMap.put("state", "" + state);
                             hashMap.put("country", "" + country);
